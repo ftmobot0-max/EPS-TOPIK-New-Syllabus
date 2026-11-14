@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPS-TOPIK Sinhala New Syllabus</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+    <div class="max-w-4xl mx-auto p-4">
+        <header class="text-center py-6">
+            <h1 class="text-2xl font-bold text-blue-400">ኮරියානු සිංහල නව විෂය නිර්දේශය</h1>
+            <p class="text-sm text-slate-400 mt-1">පොත් 02 සහ පාඩම් 60 සම්පූර්ණයෙන්ම</p>
+        </header>
+
+        <div class="flex justify-center gap-4 mb-6">
+            <button onclick="switchBook(1)" id="btnBook1" class="px-6 py-2 rounded-xl font-bold bg-blue-600 text-white shadow-lg">පොත 01 (පාඩම් 01-30)</button>
+            <button onclick="switchBook(2)" id="btnBook2" class="px-6 py-2 rounded-xl font-bold bg-slate-800 text-slate-300">පොත 02 (පාඩම් 31-60)</button>
+        </div>
+
+        <div id="lessonList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+    </div>
+
+    <script>
+        const lessonsBook1 = Array.from({length: 30}, (_, i) => ({ id: i + 1, title: `පාඩම ${i + 1}` }));
+        const lessonsBook2 = Array.from({length: 30}, (_, i) => ({ id: i + 31, title: `පාඩම ${i + 31}` }));
+
+        function switchBook(bookNum) {
+            const list = document.getElementById('lessonList');
+            const btn1 = document.getElementById('btnBook1');
+            const btn2 = document.getElementById('btnBook2');
+            
+            list.innerHTML = '';
+            let data = bookNum === 1 ? lessonsBook1 : lessonsBook2;
+
+            if(bookNum === 1) {
+                btn1.className = "px-6 py-2 rounded-xl font-bold bg-blue-600 text-white shadow-lg";
+                btn2.className = "px-6 py-2 rounded-xl font-bold bg-slate-800 text-slate-300";
+            } else {
+                btn2.className = "px-6 py-2 rounded-xl font-bold bg-blue-600 text-white shadow-lg";
+                btn1.className = "px-6 py-2 rounded-xl font-bold bg-slate-800 text-slate-300";
+            }
+
+            data.forEach(l => {
+                list.innerHTML += `
+                    <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex justify-between items-center hover:border-blue-500 transition">
+                        <div>
+                            <span class="text-xs text-blue-400 font-semibold">EPS-TOPIK</span>
+                            <h3 class="font-bold text-lg">${l.title}</h3>
+                        </div>
+                        <span class="text-xs bg-slate-700 px-3 py-1 rounded-full text-slate-300">අන්තර්ගතය ඇත</span>
+                    </div>
+                `;
+            });
+        }
+        switchBook(1);
+    </script>
+</body>
+</html>
